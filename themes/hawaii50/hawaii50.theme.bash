@@ -34,7 +34,7 @@
 
 # Show IP in prompt
 # One thing to be weary about if you have slow Internets
-IP_ENABLED=1
+IP_ENABLED=0
 
 # virtual prompts
 VIRTUAL_PROMPT_ENABLED=1
@@ -73,10 +73,10 @@ VIRTUAL_THEME_PROMPT_PREFIX=' using '
 VIRTUAL_THEME_PROMPT_SUFFIX=''
 
 # Max length of PWD to display
-MAX_PWD_LENGTH=20
+MAX_PWD_LENGTH=60
 
 # Max length of Git Hex to display
-MAX_GIT_HEX_LENGTH=5
+MAX_GIT_HEX_LENGTH=6
 
 # IP address
 IP_SEPARATOR=', '
@@ -189,9 +189,9 @@ function prompt() {
     [ $UID -eq "0" ] && UC=$SUPERUSER_COLOR
 
     if [[ $VIRTUAL_PROMPT_ENABLED == 1 ]]; then
-        PS1="$(scm_char) ${UC}\u ${DEFAULT_COLOR}at ${MACHINE_COLOR}\h$(ip_prompt_info) ${DEFAULT_COLOR}in ${DIRECTORY_COLOR}$(limited_pwd)${DEFAULT_COLOR}$(virtual_prompt_info)$(scm_prompt_info)${reset_color} \$ "
+        PS1="$(scm_char) ${UC}\u${DEFAULT_COLOR}@${MACHINE_COLOR}\h$(ip_prompt_info)${DEFAULT_COLOR}[${DIRECTORY_COLOR}$(limited_pwd)${DEFAULT_COLOR}]$(virtual_prompt_info)$(scm_prompt_info)${reset_color}\n\$ "
     else
-        PS1="$(scm_char) ${UC}\u ${DEFAULT_COLOR}at ${MACHINE_COLOR}\h$(ip_prompt_info) ${DEFAULT_COLOR}in ${DIRECTORY_COLOR}$(limited_pwd)${DEFAULT_COLOR}$(scm_prompt_info)${reset_color} \$ "
+        PS1="$(scm_char) ${UC}\u${DEFAULT_COLOR}@${MACHINE_COLOR}\h$(ip_prompt_info)${DEFAULT_COLOR}[${DIRECTORY_COLOR}$(limited_pwd)${DEFAULT_COLOR}]$(scm_prompt_info)${reset_color}\n\$ "
     fi
     PS2='> '
     PS4='+ '
